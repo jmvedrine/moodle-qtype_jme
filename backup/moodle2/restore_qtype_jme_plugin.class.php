@@ -25,8 +25,8 @@ defined('MOODLE_INTERNAL') || die();
 
 
 /**
- * restore plugin class that provides the necessary information
- * needed to restore one jme qtype plugin
+ * Restore plugin class that provides the necessary information
+ * needed to restore one jme qtype plugin.
  *
  * @copyright  2013 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
