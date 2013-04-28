@@ -34,7 +34,7 @@ Moodle versions are also availables separately.
 
 To install using git, type this command in the root of your Moodle install:
 
-    git clone -b git://github.com/jmvedrine/moodle-qtype_jme.git question/type/jme
+    git clone git://github.com/jmvedrine/moodle-qtype_jme.git question/type/jme
     echo '/question/type/jme' >> .git/info/exclude
 
 ###Installation From Downloaded zip file
