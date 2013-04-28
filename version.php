@@ -29,7 +29,7 @@ $plugin->requires  = 2012062500;
 $plugin->cron      = 0;
 $plugin->component = 'qtype_jme';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '2.5';
+$plugin->release   = '1.0 for Moodle 2.3, 2.4, 2.5';
 
 $plugin->dependencies = array(
     'qtype_shortanswer' => 2012061700
