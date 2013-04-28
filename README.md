@@ -32,31 +32,16 @@ Moodle versions are also availables separately.
 
 ###Installation Using Git
 
-To install using git for a 2.2.x Moodle installation, type this command in the
-root of your Moodle install:
+To install using git, type this command in the root of your Moodle install:
 
-    git clone -b MOODLE_22_STABLE git://github.com/jmvedrine/moodle-qtype_jme.git question/type/jme
-    echo '/question/type/jme' >> .git/info/exclude
-
-To install using git for a 2.3.x Moodle installation, type this command in the
-root of your Moodle install:
-
-    git clone -b MOODLE_23_STABLE git://github.com/jmvedrine/moodle-qtype_jme.git question/type/jme
-    echo '/question/type/jme' >> .git/info/exclude
-
-To install using git for a 2.4.x Moodle installation, type this command in the
-root of your Moodle install:
-
-    git clone -b MOODLE_24_STABLE git://github.com/jmvedrine/moodle-qtype_jme.git question/type/jme
+    git clone -b git://github.com/jmvedrine/moodle-qtype_jme.git question/type/jme
     echo '/question/type/jme' >> .git/info/exclude
 
 ###Installation From Downloaded zip file
 
 Alternatively, download the zip from :
 * The Moodle plugin directory https://moodle.org/plugins/
-* Moodle 2.2.x - https://github.com/jmvedrine/moodle-qtype_jme/archive/MOODLE_22_STABLE.zip
-* Moodle 2.3.x - https://github.com/jmvedrine/moodle-qtype_jme/archive/MOODLE_23_STABLE.zip
-* Moodle 2.4.x - https://github.com/jmvedrine/moodle-qtype_jme/archive/MOODLE_24_STABLE.zip
+* https://github.com/jmvedrine/moodle-qtype_jme/archive/master.zip
 
 unzip it into the question/type folder, and then rename the new folder to jme.
 
@@ -66,7 +51,7 @@ visit your Moodle Administration Notifications page and click on "Upgrade Moodle
 database now" button, the JME question type plugin will be installed.
 
 ###IMPORTANT WARNING
-Don't forget that this plugin will not work if there is no JME.jar file in the 
+Don't forget that this plugin will not work if there is no JME.jar file in the
 question/type/jme/jme/ subfolder ! go to http://www.molinspiration.com/jme/getjme.html
 to get a copy of this file.
 

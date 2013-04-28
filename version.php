@@ -18,19 +18,19 @@
  * JME question type version information.
  *
  * @package    qtype_jme
- * @copyright  2006 Dan Stowell
+ * @copyright  2013 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2013011800;
-$plugin->requires  = 2012112900;
+$plugin->requires  = 2012062500;
 $plugin->cron      = 0;
 $plugin->component = 'qtype_jme';
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = '2.5';
 
 $plugin->dependencies = array(
-    'qtype_shortanswer' => 2013011804
+    'qtype_shortanswer' => 2012061700
 );
