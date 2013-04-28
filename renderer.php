@@ -32,11 +32,11 @@ defined('MOODLE_INTERNAL') || die();
 class qtype_jme_renderer extends qtype_renderer {
     public function formulation_and_controls(question_attempt $qa,
             question_display_options $options) {
-		global $CFG, $PAGE;
-		
+        global $CFG, $PAGE;
+
         $question = $qa->get_question();
-		
-		$questiontext = $question->format_questiontext($qa);
+
+        $questiontext = $question->format_questiontext($qa);
         $placeholder = false;
         if (preg_match('/_____+/', $questiontext, $matches)) {
             $placeholder = $matches[0];
@@ -71,14 +71,14 @@ class qtype_jme_renderer extends qtype_renderer {
                                                 $question->get_validation_error($lastresponse),
                                                 array('class' => 'validationerror'));
         }
-		
-		if ($options->readonly) {
-		    $currentanswer = $qa->get_last_qt_var('answer');
+
+        if ($options->readonly) {
+            $currentanswer = $qa->get_last_qt_var('answer');
             if (!$currentanswer) {
-            $currentanswer = '';
+                $currentanswer = '';
             }
-		    $result .= html_writer::tag('div', get_string('youranswer', 'qtype_jme', $currentanswer), array('class' => 'qtext'));
-		}
+            $result .= html_writer::tag('div', get_string('youranswer', 'qtype_jme', $currentanswer), array('class' => 'qtext'));
+        }
 
         $result .= html_writer::tag('div',
                                     $this->hidden_fields($qa),

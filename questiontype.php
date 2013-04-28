@@ -18,7 +18,7 @@
  * Question type class for the jme question type.
  *
  * @package    qtype_jme
- * @copyright  2006 Dan Stowell
+ * @copyright  2013 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,30 +36,30 @@ require_once($CFG->dirroot . '/question/type/shortanswer/questiontype.php');
  */
 class qtype_jme extends qtype_shortanswer {
     public function extra_question_fields() {
-        return array('question_jme', 'answers');
+        return null;
     }
 
-	protected function initialise_question_instance(question_definition $question, $questiondata) {
+    protected function initialise_question_instance(question_definition $question, $questiondata) {
         // For JME questions comparisons are always case sensitive.
         $questiondata->options->usecase = true;
-		parent::initialise_question_instance($question, $questiondata);
+        parent::initialise_question_instance($question, $questiondata);
     }
 
-	/**
-    * Provide export functionality for xml format
-    * As answers field in question_jme contains answers ids we can't use typebase method.
-    * @param question object the question object
-    * @param format object the format object so that helper methods can be used
-    * @param extra mixed any additional format specific data that may be passed by the format (see format code for info)
-    * @return string the data to append to the output buffer or false if error
-    */
-    function export_to_xml( $question, qformat_xml $format, $extra=null ) {
-		// Write out all the answers
-		$expout = $format->write_answers($question->options->answers);
+    /**
+     * Provide export functionality for xml format
+     * As answers field in question_jme contains answers ids we can't use typebase method.
+     * @param question object the question object
+     * @param format object the format object so that helper methods can be used
+     * @param extra mixed any additional format specific data that may be passed by the format (see format code for info)
+     * @return string the data to append to the output buffer or false if error
+     */
+    public function export_to_xml( $question, qformat_xml $format, $extra=null ) {
+        // Write out all the answers.
+        $expout = $format->write_answers($question->options->answers);
         return $expout;
     }
 
-    function import_from_xml($data, $question, qformat_xml $format, $extra=null) {
+    public function import_from_xml($data, $question, qformat_xml $format, $extra=null) {
         if (!array_key_exists('@', $data)) {
             return false;
         }
@@ -68,13 +68,13 @@ class qtype_jme extends qtype_shortanswer {
         }
         if ($data['@']['type'] == 'jme') {
 
-            // get common parts
+            // Get common parts.
             $question = $format->import_headers($data);
 
-            // header parts particular to jme
+            // Header parts particular to jme.
             $question->qtype = 'jme';
 
-		// run through the answers
+            // Run through the answers.
             $answers = $data['#']['answer'];
             $a_count = 0;
             foreach ($answers as $answer) {
@@ -85,7 +85,7 @@ class qtype_jme extends qtype_shortanswer {
                 ++$a_count;
             }
 
-			$format->import_hints($question, $data);
+            $format->import_hints($question, $data);
 
             return $question;
         }

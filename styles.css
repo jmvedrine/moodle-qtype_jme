@@ -7,12 +7,12 @@
     width: 65%;
 }
 .que.jme.applet {
-	width:520px;
+    width:520px;
 }
 .que.jme.author {
-		float: right;
-		font-style: italic ;
-		font-size: 10px;
+        float: right;
+        font-style: italic ;
+        font-size: 10px;
 }
 #page-question-type-jme .mform .textareamonospace {
     white-space: pre;

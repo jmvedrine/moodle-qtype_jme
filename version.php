@@ -24,13 +24,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2012060100;
-$plugin->requires  = 2011102700;
+$plugin->version   = 2013011800;
+$plugin->requires  = 2012112900;
 $plugin->cron      = 0;
 $plugin->component = 'qtype_jme';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '2.2';
+$plugin->release   = '2.5';
 
 $plugin->dependencies = array(
-    'qtype_shortanswer' => 2011102700
+    'qtype_shortanswer' => 2013011804
 );

@@ -1,4 +1,3 @@
-
 function getSmiles(textfieldid) {
 	document.getElementById(textfieldid).value = document.getElementById('JME' + textfieldid).smiles();
 }

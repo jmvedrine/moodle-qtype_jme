@@ -15,42 +15,42 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * JME question type upgrade code.
+ *
  * @package    qtype_jme
  * @copyright  2013 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+
 defined('MOODLE_INTERNAL') || die();
 
+
 /**
- * jme question type conversion handler
+ * Upgrade code for the jme question type.
+ * @param int $oldversion the version we are upgrading from.
  */
-class moodle1_qtype_jme_handler extends moodle1_qtype_handler {
+function xmldb_qtype_jme_upgrade($oldversion) {
+    global $CFG, $DB;
 
-    /**
-     * @return array
-     */
-    public function get_question_subpaths() {
-        return array(
-            'ANSWERS/ANSWER',
-            'JME',
-        );
-    }
+    $dbman = $DB->get_manager();
 
-    /**
-     * Appends the jme specific information to the question
-     */
-    public function process_question(array $data, array $raw) {
+    // Moodle v2.4.0 release upgrade line
+    // Put any upgrade step following this.
 
-        // Convert and write the answers first.
-        if (isset($data['answers'])) {
-            $this->write_answers($data['answers'], $this->pluginname);
+    if ($oldversion < 2013011800) {
+
+        // Define table question_jme to be dropped from question_jme.
+        $table = new xmldb_table('question_jme');
+
+        // Conditionally launch drop field answers.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
         }
 
-        // Convert and write the jme extra fields.
-        foreach ($data['jme'] as $jme) {
-            $jme['id'] = $this->converter->get_nextid();
-            $this->write_xml('jme', $jme, array('/jme/id'));
-        }
+        // Shortanswer savepoint reached.
+        upgrade_plugin_savepoint(true, 2013011800, 'qtype', 'jme');
     }
+
+    return true;
 }
