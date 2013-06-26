@@ -1,10 +1,9 @@
 
 
   Moodle question type addon: "JME" (Java Molecular Editor)
-
   JME (c) Novartis AG - courtesy of Peter Ertl, Novartis
-
   Original Moodle question type written by Dan Stowell
+  Upgraded and maintained by Jean-Michel Vedrine
 
 ###IMPORTANT:
 The jme Moodle question type uses a java applet, the JMEMolecularEditor©.
