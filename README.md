@@ -27,7 +27,7 @@ the file "JME.jar" is NOT open-source.
 
 ##INSTALLATION:
 ###Requires
-This version works with Moodle 2.3, 2.4 and 2.5. Other versions for older
+This version works with Moodle 2.5. Other versions for older
 Moodle versions are also availables separately.
 
 ###Installation Using Git
