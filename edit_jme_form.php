@@ -34,6 +34,7 @@ class qtype_jme_edit_form extends qtype_shortanswer_edit_form {
         $PAGE->requires->js('/question/type/jme/jme_script.js');
         $PAGE->requires->css('/question/type/jme/jme_styles.css');
         $mform->addElement('hidden', 'usecase', 1);
+        $mform->setType('usecase', PARAM_INT);
         $mform->addElement('static', 'answersinstruct',
                 get_string('correctanswers', 'qtype_jme'),
                 get_string('filloutoneanswer', 'qtype_jme'));
@@ -67,15 +68,22 @@ class qtype_jme_edit_form extends qtype_shortanswer_edit_form {
 
     protected function get_per_answer_fields($mform, $label, $gradeoptions,
             &$repeatedoptions, &$answersoption) {
-
-        $repeated = parent::get_per_answer_fields($mform, $label, $gradeoptions,
-                $repeatedoptions, $answersoption);
-
+        $repeated = array();
+        $answeroptions = array();
+        $answeroptions[] = $mform->createElement('text', 'answer',
+                $label, array('size' => 40));
         // Construct the insert button.
         $scriptattrs = 'onClick = "getSmilesEdit(this.name)"';
-        $insert_button = $mform->createElement('button', 'insert', get_string('insertfromeditor', 'qtype_jme'), $scriptattrs);
-        array_splice($repeated, 2, 0, array($insert_button));
-
+        $answeroptions[] = $mform->createElement('button', 'insert', get_string('insertfromeditor', 'qtype_jme'), $scriptattrs);
+        $answeroptions[] = $mform->createElement('select', 'fraction',
+                get_string('grade'), $gradeoptions);
+        $repeated[] = $mform->createElement('group', 'answeroptions',
+                 $label, $answeroptions, null, false);
+        $repeated[] = $mform->createElement('editor', 'feedback',
+                get_string('feedback', 'question'), array('rows' => 5), $this->editoroptions);
+        $repeatedoptions['answer']['type'] = PARAM_RAW;
+        $repeatedoptions['fraction']['default'] = 0;
+        $answersoption = 'answers';
         return $repeated;
     }
 
