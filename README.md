@@ -27,21 +27,21 @@ the file "JME.jar" is NOT open-source.
 
 ##INSTALLATION:
 ###Requires
-This version works with Moodle 2.3, 2.4 and 2.5. Other versions for older
+This version works with Moodle 2.3 and 2.4. Other versions for older
 Moodle versions are also availables separately.
+A version upgraded for Moodle 2.5 is also available.
 
 ###Installation Using Git
 
 To install using git, type this command in the root of your Moodle install:
 
-    git clone git://github.com/jmvedrine/moodle-qtype_jme.git question/type/jme
+    git clone -b MOODLE_23_STABLE git://github.com/jmvedrine/moodle-qtype_jme.git question/type/jme
     echo '/question/type/jme' >> .git/info/exclude
 
 ###Installation From Downloaded zip file
 
 Alternatively, download the zip from :
-* The Moodle plugin directory https://moodle.org/plugins/
-* https://github.com/jmvedrine/moodle-qtype_jme/archive/master.zip
+  https://github.com/jmvedrine/moodle-qtype_jme/archive/MOODLE_23_STABLE.zip
 
 unzip it into the question/type folder, and then rename the new folder to jme.
 
