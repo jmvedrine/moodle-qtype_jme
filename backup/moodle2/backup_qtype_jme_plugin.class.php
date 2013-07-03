@@ -50,6 +50,16 @@ class backup_qtype_jme_plugin extends backup_qtype_plugin {
         // to the tree before any other information that will use them.
         $this->add_question_question_answers($pluginwrapper);
 
+        // Now create the qtype own structures.
+        $jme = new backup_nested_element('jme', array('id'), array('jmeoptions, width, height'));
+
+        // Now the own qtype tree.
+        $pluginwrapper->add_child($jme);
+
+        // Set source to populate the data.
+        $jme->set_source_table('qtype_jme_options',
+                array('questionid' => backup::VAR_PARENTID));
+
         // Don't need to annotate ids nor files.
 
         return $plugin;

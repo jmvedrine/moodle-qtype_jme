@@ -35,7 +35,6 @@ class qtype_jme_renderer extends qtype_renderer {
         global $CFG, $PAGE;
 
         $question = $qa->get_question();
-
         $questiontext = $question->format_questiontext($qa);
         $placeholder = false;
         if (preg_match('/_____+/', $questiontext, $matches)) {
@@ -44,12 +43,12 @@ class qtype_jme_renderer extends qtype_renderer {
 
         $toreplaceid = 'applet'.$qa->get_slot();
         $toreplace = html_writer::tag('span',
-                                      get_string('enablejavaandjavascript', 'qtype_jme'),
+                                      get_string('enablejavascript', 'qtype_jme'),
                                       array('id' => $toreplaceid));
 
         if ($placeholder) {
             $toreplace = html_writer::tag('span',
-                                      get_string('enablejavaandjavascript', 'qtype_jme'),
+                                      get_string('enablejavascript', 'qtype_jme'),
                                       array('class' => 'ablock'));
             $questiontext = substr_replace($questiontext,
                                             $toreplace,
@@ -84,23 +83,26 @@ class qtype_jme_renderer extends qtype_renderer {
                                     $this->hidden_fields($qa),
                                     array('class' => 'inputcontrol'));
 
-        $this->require_js($toreplaceid, $qa, $options->readonly, $options->correctness, $CFG->qtype_jme_options);
+        $this->require_js($toreplaceid, $qa, $options->readonly, $options->correctness);
 
         return $result;
     }
 
-    protected function require_js($toreplaceid, question_attempt $qa, $readonly, $correctness, $appletoptions) {
+    protected function require_js($toreplaceid, question_attempt $qa, $readonly, $correctness) {
         global $PAGE;
         $jsmodule = array(
             'name'     => 'qtype_jme',
             'fullpath' => '/question/type/jme/module.js',
             'requires' => array(),
             'strings' => array(
-                array('enablejava', 'qtype_jme')
+                array('enablejavascript', 'qtype_jme')
             )
         );
         $topnode = 'div.que.jme#q'.$qa->get_slot();
-        $appleturl = new moodle_url('/question/type/jme/jme/JME.jar');
+        $question = $qa->get_question();
+        $width = $question->width ."px";
+        $height = $question->height . "px";
+        $appletoptions = $question->jmeoptions;
         if ($correctness) {
             $feedbackimage = $this->feedback_image($this->fraction_for_last_response($qa));
         } else {
@@ -108,12 +110,15 @@ class qtype_jme_renderer extends qtype_renderer {
         }
         $name = 'JME'.$qa->get_slot();
         $appletid = 'jme'.$qa->get_slot();
+        
+        $PAGE->requires->js('/question/type/jme/JSME/jsme/jsme.nocache.js');
         $PAGE->requires->js_init_call('M.qtype_jme.insert_jme_applet',
                                       array($toreplaceid,
                                             $name,
                                             $appletid,
                                             $topnode,
-                                            $appleturl->out(),
+                                            $width,
+                                            $height,
                                             $feedbackimage,
                                             $readonly,
                                             $appletoptions),

@@ -30,13 +30,15 @@ require_once($CFG->dirroot . '/question/engine/lib.php');
 require_once($CFG->dirroot . '/question/type/jme/question.php');
 require_once($CFG->dirroot . '/question/type/shortanswer/questiontype.php');
 
+define('QTYPE_JME_APPLET_WIDTH', 420);
+define('QTYPE_JME_APPLET_HEIGHT', 315);
 
 /**
  * The jme question type.
  */
 class qtype_jme extends qtype_shortanswer {
-    public function extra_question_fields() {
-        return null;
+        public function extra_question_fields() {
+        return array('qtype_jme_options', 'jmeoptions', 'width', 'height');
     }
 
     protected function initialise_question_instance(question_definition $question, $questiondata) {
