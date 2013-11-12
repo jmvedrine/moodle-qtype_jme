@@ -48,7 +48,7 @@ function xmldb_qtype_jme_upgrade($oldversion) {
             $dbman->drop_table($table);
         }
 
-        // Shortanswer savepoint reached.
+        // Jme savepoint reached.
         upgrade_plugin_savepoint(true, 2013011800, 'qtype', 'jme');
     }
 
@@ -75,10 +75,10 @@ function xmldb_qtype_jme_upgrade($oldversion) {
             $dbman->create_table($table);
         }
 
-        // jme savepoint reached.
+        // Jme savepoint reached.
         upgrade_plugin_savepoint(true, 2013070100, 'qtype', 'jme');
     }
-    
+
     if ($oldversion < 2013070102) {
         // Insert a row into the qtype_jme_options table for each existing jme question.
         $DB->execute("
@@ -91,7 +91,7 @@ function xmldb_qtype_jme_upgrade($oldversion) {
                     FROM {qtype_jme_options} qeo
                     WHERE qeo.questionid = q.id)");
 
-        // jme savepoint reached
+        // Jme savepoint reached.
         upgrade_plugin_savepoint(true, 2013070102, 'qtype', 'jme');
     }
 

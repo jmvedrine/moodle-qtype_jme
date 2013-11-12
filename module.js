@@ -31,7 +31,7 @@ M.qtype_jme={
         document.JME[appletname] = new JSApplet.JSME(id, width, height, {
         //optional parameters
             "options" : appletoptions,
-     		"jme" : startingStructure,
+     		"jme" : startingStructure
         });
     }
 }

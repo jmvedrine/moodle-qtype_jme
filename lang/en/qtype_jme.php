@@ -46,7 +46,7 @@ $string['jmeoptions_help'] = 'Enter a comma separated list of JSME applet option
 <li><strong>nocanonize</strong> - SMILES canonicalization and detection of aromaticity supressed</li>
 <li><strong>nostereo</strong> - stereochemistry not considered when creating SMILES</li>
 <li><strong>reaction, noreaction</strong> - enable / disable reaction input</li>
-<li><strong>multipart</strong> - possibility to enter multipart structures</li> 
+<li><strong>multipart</strong> - possibility to enter multipart structures</li>
 <li><strong>polarnitro</strong> - prevent automatic conversion of nitro (and similar) groups into nonpolar form</li>
 <li><strong>number/ autonumber</strong> - possibility to number (mark) atoms</li>
 <li><strong>depict</strong> - the applet will appear without editing butons, this is used for structure display only</li>

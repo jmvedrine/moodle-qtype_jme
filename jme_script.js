@@ -16,4 +16,3 @@ function jsmeOnLoad() {
         "options" : document.getElementById("id_jmeoptions").value
     });
 }
-

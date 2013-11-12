@@ -51,7 +51,7 @@ class backup_qtype_jme_plugin extends backup_qtype_plugin {
         $this->add_question_question_answers($pluginwrapper);
 
         // Now create the qtype own structures.
-        $jme = new backup_nested_element('jme', array('id'), array('jmeoptions, width, height'));
+        $jme = new backup_nested_element('jme', array('id'), array('jmeoptions', 'width', 'height'));
 
         // Now the own qtype tree.
         $pluginwrapper->add_child($jme);

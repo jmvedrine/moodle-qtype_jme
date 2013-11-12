@@ -37,17 +37,17 @@ class qtype_jme_edit_form extends qtype_shortanswer_edit_form {
         $mform->setType('usecase', PARAM_INT);
         $optionscript = 'onClick = "setJSMEoptions()"';
         $label =  get_string('jmeoptions', 'qtype_jme');
-        $editoroptions[] = $mform->createElement('text', 'jmeoptions','' , array('size'=>50));
+        $editoroptions[] = $mform->createElement('text', 'jmeoptions', '', array('size' => 50));
         $editoroptions[] = $mform->createElement('button', 'setoptions', get_string('setoptions', 'qtype_jme'), $optionscript);
         $mform->addElement('group', 'editoroptions',
                  $label, $editoroptions, null, false);
         $mform->setDefault('jmeoptions', $CFG->qtype_jme_options);
         $mform->setType('jmeoptions', PARAM_RAW);
         $mform->addHelpButton('editoroptions', 'jmeoptions', 'qtype_jme');
-        $mform->addElement('text', 'width', get_string('width', 'qtype_jme'), array('size'=>6));
+        $mform->addElement('text', 'width', get_string('width', 'qtype_jme'), array('size' => 6));
         $mform->setDefault('width', QTYPE_JME_APPLET_WIDTH);
         $mform->setType('width', PARAM_INT);
-        $mform->addElement('text', 'height', get_string('height', 'qtype_jme'), array('size'=>6));
+        $mform->addElement('text', 'height', get_string('height', 'qtype_jme'), array('size' => 6));
                 $mform->setDefault('height', QTYPE_JME_APPLET_HEIGHT);
         $mform->setType('height', PARAM_INT);
         $mform->addElement('static', 'answersinstruct',

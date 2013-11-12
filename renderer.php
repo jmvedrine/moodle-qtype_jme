@@ -110,7 +110,7 @@ class qtype_jme_renderer extends qtype_renderer {
         }
         $name = 'JME'.$qa->get_slot();
         $appletid = 'jme'.$qa->get_slot();
-        
+
         $PAGE->requires->js('/question/type/jme/JSME/jsme/jsme.nocache.js');
         $PAGE->requires->js_init_call('M.qtype_jme.insert_jme_applet',
                                       array($toreplaceid,

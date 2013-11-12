@@ -40,7 +40,7 @@
 /*    	jsmeApplet = new JSApplet.JSME("appletContainer",  {
      		//optional parameters
     		"options" : "query,hydrogens",
-    		"jme" : startingStructure,
+    		"jme" : startingStructure
     	});
  */   	
     	
@@ -63,6 +63,7 @@
     	//example:
     	//document.getElementById("button").disabled=false;
         
+
      	
     }
     
@@ -175,49 +176,10 @@
     </table>
 
 
-<p><b>public void JME.options(String)</b></p><p>enables to change applet parameters dynamically from JavaScript. Recognized keywords are :<br>
-<b>xbutton, noxbutton</b> - show / hide the X button (even when not visible the X button functionality is accessible through the X and H key shortcuts<br>
-<b>rbutton, norbutton</b> - show / hide the R button (to mark connection of substituent with the main scaffold)<br>
-<!--r1button, r2button, r3button - show buttons with R1, R2 and R3 (useful for creation of scaffolds for combinatorial chemistry)<br>-->
-<b>atommovebutton, noatommovebutton</b> - show / hide the atom move button<br>
-<b>hydrogens, nohydrogens</b> - display / hide hydrogens<br>
-<b>query, noquery</b> - enable / disable query features<br
-><b>autoez, noautoez</b> - automatic generation of SMILES with E,Z stereochemistry<br>
-<b>nocanonize</b> - SMILES canonicalization and detection of aromaticity supressed<br>
-<b>nostereo</b> - stereochemistry not considered when creating SMILES<br>
-<b>reaction, noreaction</b> - enable / disable reaction input<br>
-<b>multipart</b> - possibility to enter multipart structures<br>
-<b>polarnitro</b> - prevent automatic conversion of nitro (and similar) groups into nonpolar form<br>
-<b> number / autonumber</b> - possibility to number (mark) atoms<br>
-<b>depict</b> - the applet will appear without editing buttons, this is used for structure display only<br>
-<b>border</b> (used together with the depict option) - displays a border around depicted molecule
-<br><b>newlook, oldlook</b> - turn on/off the old Java  based JME look (default is off)
 
 
 
-<p><b>public String getHelpURL()</b> return the url used to display JSME help page.</p>
 
-<p><b>public void alert(String message)</b> Display an alert box with the look and feel of JSME.
-</p>
-
-
-<p><b>public void showInfo(String message)</b> Display a message in the bottom bar.
-</p>
-
-
-
-<p><b>public void setNotifyAtomHighLightChangeJSfunction(String notifyAtomHighLightJSfunction)</b><br>
-Set the name of the JavaScript function that will be called each time the mouse move over an atom.
-<br>
-The notifyAtomHighLightJSfunction will receive two arguments: the molecule index and the atom index, both start at 1, as in the MOL format.
-<br>
-To cancel, set to null.
-<br>
-Important: the option nocanonize must be used in the initialization of the applet.
-<br>
-</p>
-
-<p>See also <a href="http://www.molinspiration.com/jme/doc/jme_functions.html">description</a> of the JME API.</p>
 
 <hr>
 

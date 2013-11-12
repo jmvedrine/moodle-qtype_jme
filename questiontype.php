@@ -37,7 +37,7 @@ define('QTYPE_JME_APPLET_HEIGHT', 315);
  * The jme question type.
  */
 class qtype_jme extends qtype_shortanswer {
-        public function extra_question_fields() {
+    public function extra_question_fields() {
         return array('qtype_jme_options', 'jmeoptions', 'width', 'height');
     }
 

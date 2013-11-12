@@ -27,7 +27,7 @@
     	
      	jsmeApplet = new JSApplet.JSME("appletContainer", "640px", "480px", {
      		//optional parameters
-     		"options" : "query,hydrogens,nocanonize,removehs"
+     		"options" : "query,hydrogens,removehs"
      		//removehs : remove explicit hydrogens when importing a structure - useful when importing from the NCI service
      	});
 		
@@ -132,7 +132,6 @@
 <h3>Compound to name</h3>
 The name of the molecule in the editor is fetched from the NCI web service (http://cactus.nci.nih.gov/chemical/structure) after the structure in the editor has changed.<br>
 
-<br>Important: the "nocanonize" option must be used!
 
 
 <h3>Pasting any chemical structure representation</h3>
