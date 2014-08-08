@@ -30,13 +30,17 @@ class qtype_jme_edit_form extends qtype_shortanswer_edit_form {
 
     protected function definition_inner($mform) {
         global $PAGE, $CFG;
-        $PAGE->requires->js('/question/type/jme/JSME/jsme/jsme.nocache.js');
+
         $PAGE->requires->js('/question/type/jme/jme_script.js');
-        $PAGE->requires->css('/question/type/jme/jme_styles.css');
+        $PAGE->requires->css('/question/type/jme/styles.css');
+
+        $mform->addElement('html', html_writer::tag('div', get_string('enablejavaandjavascript', 'qtype_jme'),
+                array('class' => 'jme_applet', 'code' => 'JME.class', 'id' => 'jme1', 'name' => 'JME1',
+                'archive' => 'JME.jar', 'width' => '360', 'height' => '315')));
         $mform->addElement('hidden', 'usecase', 1);
         $mform->setType('usecase', PARAM_INT);
         $optionscript = 'onClick = "setJSMEoptions()"';
-        $label =  get_string('jmeoptions', 'qtype_jme');
+        $label = get_string('jmeoptions', 'qtype_jme');
         $editoroptions[] = $mform->createElement('text', 'jmeoptions', '', array('size' => 50));
         $editoroptions[] = $mform->createElement('button', 'setoptions', get_string('setoptions', 'qtype_jme'), $optionscript);
         $mform->addElement('group', 'editoroptions',
@@ -55,13 +59,14 @@ class qtype_jme_edit_form extends qtype_shortanswer_edit_form {
                 get_string('filloutoneanswer', 'qtype_jme'));
         $mform->closeHeaderBefore('answersinstruct');
 
-        // Output the jme applet.
-        $mform->addElement('html', html_writer::tag('span', '', array('id' => 'appletContainer')));
-
         $this->add_per_answer_fields($mform, get_string('answerno', 'qtype_jme', '{no}'),
                 question_bank::fraction_options());
 
         $this->add_interactive_settings();
+
+        // Include JSME loader script as an html tag.
+        $jsmescript = $CFG->wwwroot.'/question/type/pmatchjme/jsme/jsme.nocache.js';
+        $mform->addElement('html', html_writer::tag('script', '', array('src' => $jsmescript)));
     }
 
     protected function get_per_answer_fields($mform, $label, $gradeoptions,

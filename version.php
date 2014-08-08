@@ -24,12 +24,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2013070102;
+$plugin->version   = 2014080800;
 $plugin->requires  = 2013050100;
 $plugin->cron      = 0;
 $plugin->component = 'qtype_jme';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '1.2 for Moodle 2.5';
+$plugin->release   = '1.4 for Moodle 2.5';
 
 $plugin->dependencies = array(
     'qtype_shortanswer' => 2013050100

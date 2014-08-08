@@ -95,5 +95,16 @@ function xmldb_qtype_jme_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2013070102, 'qtype', 'jme');
     }
 
+    if ($oldversion < 2014080800) {
+        // Changing the default of field width on table qtype_jme_options to 360.
+        $table = new xmldb_table('qtype_jme_options');
+        $field = new xmldb_field('width', XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, '360');
+
+        // Launch change of default for field width.
+        $dbman->change_field_default($table, $field);
+
+        // Main savepoint reached.
+        upgrade_plugin_savepoint(true, 2014080800, 'qtype', 'jme');
+    }
     return true;
 }

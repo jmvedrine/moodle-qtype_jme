@@ -9,7 +9,7 @@
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Foreign key references question.id."/>
         <FIELD NAME="jmeoptions" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" COMMENT="Options for the JME Applet."/>
-        <FIELD NAME="width" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="420" SEQUENCE="false" COMMENT="Width of JME Applet in pixels."/>
+        <FIELD NAME="width" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="360" SEQUENCE="false" COMMENT="Width of JME Applet in pixels."/>
         <FIELD NAME="height" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="315" SEQUENCE="false" COMMENT="Height the JME Applet in pixels."/>
       </FIELDS>
       <KEYS>

@@ -74,7 +74,7 @@ class restore_qtype_jme_plugin extends restore_qtype_plugin {
                 $data->jmeoptions = $CFG->qtype_jme_options;
             }
             if (!isset($data->width)) {
-                $data->width = 420;
+                $data->width = 360;
             }
             if (!isset($data->height)) {
                 $data->height = 315;

@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/question/engine/lib.php');
 require_once($CFG->dirroot . '/question/type/jme/question.php');
 require_once($CFG->dirroot . '/question/type/shortanswer/questiontype.php');
 
-define('QTYPE_JME_APPLET_WIDTH', 420);
+define('QTYPE_JME_APPLET_WIDTH', 360);
 define('QTYPE_JME_APPLET_HEIGHT', 315);
 
 /**
@@ -78,13 +78,13 @@ class qtype_jme extends qtype_shortanswer {
 
             // Run through the answers.
             $answers = $data['#']['answer'];
-            $a_count = 0;
+            $anscount = 0;
             foreach ($answers as $answer) {
                 $ans = $format->import_answer( $answer );
-                $question->answer[$a_count] = $ans->answer['text'];
-                $question->fraction[$a_count] = $ans->fraction;
-                $question->feedback[$a_count] = $ans->feedback;
-                ++$a_count;
+                $question->answer[$anscount] = $ans->answer['text'];
+                $question->fraction[$anscount] = $ans->fraction;
+                $question->feedback[$anscount] = $ans->feedback;
+                ++$anscount;
             }
 
             $format->import_hints($question, $data);

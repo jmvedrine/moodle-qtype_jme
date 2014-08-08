@@ -25,6 +25,8 @@
 $string['addmoreanswerblanks'] = 'Blanks for {no} More Answers';
 $string['answermustbegiven'] = 'You must enter an answer if there is a grade or feedback.';
 $string['answerno'] = 'Answer {$a}';
+$string['enablejava'] = 'Tried but failed to load JME editor. You have not got a JAVA runtime environment working in your browser. You will need one to attempt this question.';
+$string['enablejavaandjavascript'] = 'Loading JME editor.... If this message does not get replaced by the JME editor then you have not got javascript and a JAVA runtime environment working in your browser.';
 $string['enablejavascript'] = 'Loading JME editor.... If this message does not get replaced by the JSME editor then you have not got javascript working in your browser.';
 $string['pluginname'] = 'Javascript Molecular Editor';
 $string['pluginname_help'] = 'Allows a response of a molecule that is graded by comparing against various model answers.';
