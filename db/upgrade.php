@@ -82,7 +82,7 @@ function xmldb_qtype_jme_upgrade($oldversion) {
     if ($oldversion < 2013070102) {
         // Insert a row into the qtype_jme_options table for each existing jme question.
         $DB->execute("
-                INSERT INTO {qtype_jme_options} (questionid, jmeoptions)
+                INSERT INTO {qtype_jme_options} (questionid, jmeoptions, width, height)
                 SELECT q.id, '" . $CFG->qtype_jme_options . "', 420, 315
                 FROM {question} q
                 WHERE q.qtype = 'jme'
