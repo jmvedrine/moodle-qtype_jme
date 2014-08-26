@@ -65,7 +65,7 @@ class qtype_jme_edit_form extends qtype_shortanswer_edit_form {
         $this->add_interactive_settings();
 
         // Include JSME loader script as an html tag.
-        $jsmescript = $CFG->wwwroot.'/question/type/pmatchjme/jsme/jsme.nocache.js';
+        $jsmescript = $CFG->wwwroot.'/question/type/jme/jsme/jsme.nocache.js';
         $mform->addElement('html', html_writer::tag('script', '', array('src' => $jsmescript)));
     }
 
