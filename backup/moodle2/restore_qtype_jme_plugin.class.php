@@ -43,6 +43,44 @@ class restore_qtype_jme_plugin extends restore_qtype_plugin {
         // This qtype uses question_answers, add them.
         $this->add_question_question_answers($paths);
 
+        // Add own qtype stuff.
+        $elename = 'jme';
+        // We used get_recommended_name() so this works.
+        $elepath = $this->get_pathfor('/jme');
+        $paths[] = new restore_path_element($elename, $elepath);
+
         return $paths; // And we return the interesting paths.
+    }
+
+    /**
+     * Process the qtype/jme element
+     */
+    public function process_jme($data) {
+        global $DB, $CFG;
+
+        $data = (object)$data;
+        $oldid = $data->id;
+
+        // Detect if the question is created or mapped.
+        $oldquestionid   = $this->get_old_parentid('question');
+        $newquestionid   = $this->get_new_parentid('question');
+        $questioncreated = $this->get_mappingid('question_created', $oldquestionid) ? true : false;
+
+        // If the question has been created by restore, we need to create its
+        // qtype_jme_options too.
+        if ($questioncreated) {
+            $data->questionid = $newquestionid;
+            if (!isset($data->jmeoptions)) {
+                $data->jmeoptions = $CFG->qtype_jme_options;
+            }
+            if (!isset($data->width)) {
+                $data->width = 360;
+            }
+            if (!isset($data->height)) {
+                $data->height = 315;
+            }
+            $newitemid = $DB->insert_record('qtype_jme_options', $data);
+            $this->set_mapping('qtype_jme_options', $oldid, $newitemid);
+        }
     }
 }

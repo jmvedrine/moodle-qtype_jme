@@ -1,32 +1,40 @@
 
 
 #Moodle question type addon: "JME" (Java Molecular Editor)
-JME (c) Novartis AG - courtesy of Peter Ertl, Novartis
+
 Original Moodle question type written by Dan Stowell
 Upgraded and maintained by Jean-Michel Vedrine
 
 ###IMPORTANT:
-The jme Moodle question type uses a java applet, the JMEMolecularEditor©.
-JMEMolecularEditor© is a freely-available molecule editor tool, but it is not open-source.
-We have obtained permission from the author of the tool (Peter Ertl,
-permission granted 2006-03-31 and 2011-01-17, to distribute it as a
-Moodle addon, but if you wish to do anything different with JME,
-you will need to obtain permission first. For more information see
-http://www.molinspiration.com/jme/doc/index.html.
+Previous versions of the jme Moodle question type were using a java applet,
+the JME Molecule Editor©.
+JME Molecule Editor© is a freely-available molecule editor tool, but it is not
+open-source.
+Another problem with JME is that it is now very difficult to work with java applets
+due to security alerts and rules in web browsers.
+This new version uses a javascript applet : JSME.
+JSME Molecule Editor by Pter Erl and Bruno Bienfait by Peter Ertl and Bruno Bienfait
+is a free molecule editor written in JavaScript. JSME is a direct successor of the
+JME Molecule Editor applet.
+The JSME Molecule Editor is open source and is released under the terms of the BSD license.
+The jme Moodle question type plugin is open-source under the GNU Public Licence
+GPL), the same licence as Moodle.
 
-If you downloaded this addon from a git repository, the JME.jar file necessary
-for it to work is NOT INCLUDED. So you must get a copy of this Java archive from
-Peter Ertl (see http://www.molinspiration.com/jme/getjme.html) to be able to use this plugin.
-Put a copy of the JME.jar file in the question/type/jme/jme/ subfolder.
+If you downloaded this plugin from the Moodle plugin Directry or from a github repository,
+all the JSME files necessary for it to work are NOT INCLUDED. So you must get a copy
+of the JSME Molecule Editor to be able to use this plugin.
+Go to http://peter-ertl.com/jsme/ and click on the download link to download the latest
+release of the JSME Molecule Editor (JSME_2014-06-28 at the time this text is written).
+Unzip the archive and copy the CONTENT of the jsme/ subfolder into question/type/jme/jsme/.
+Warning : verify you get it right : you should have a question/type/jme/jsme/jsme.nocache.js
+file and NOT question/type/jme/jsme/jsme/jsme.nocache.js !
+You would not be the first one to make this mistake !
 
-The jme Moodle addon is open-source under the
-GNU Public Licence (GPL), the same licence as Moodle. Please note again that
-the file "JME.jar" is NOT open-source.
 
 
 ##INSTALLATION:
 ###Requires
-This version works with Moodle 2.5. Other versions for older
+This version works with Moodle 2.6, 2.7, 2.8. Other versions for older
 Moodle versions are also availables separately.
 
 ###Installation Using Git
@@ -43,6 +51,7 @@ Alternatively, download the zip from :
 * https://github.com/jmvedrine/moodle-qtype_jme/archive/master.zip
 
 unzip it into the question/type folder, and then rename the new folder to jme.
+WARNING: if the folder's name is something like jme_master, the plugin will not work.
 
 ###Plugin Initialisation
 Once you have installed the files on your server, as for any other Moodle plugin,
@@ -50,9 +59,9 @@ visit your Moodle Administration Notifications page and click on "Upgrade Moodle
 database now" button, the JME question type plugin will be installed.
 
 ###IMPORTANT WARNING
-Don't forget that this plugin will not work if there is no JME.jar file in the
-question/type/jme/jme/ subfolder ! go to http://www.molinspiration.com/jme/getjme.html
-to get a copy of this file.
+Don't forget that this plugin will not work if all the files from the JSME Molecule Editor
+aren't in the question/type/jme/jsme/ subfolder ! Go to http://peter-ertl.com/jsme/ to
+get a copy of the JSME Molecule Editor and put it in the right place.
 
 ##USAGE:
 

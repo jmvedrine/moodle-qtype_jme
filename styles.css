@@ -4,27 +4,24 @@
     display: inline;
 }
 .que.jme .answer input {
-    width: 65%;
-}
-.que.jme.applet {
-    width:520px;
-}
-.que.jme.author {
-        float: right;
-        font-style: italic ;
-        font-size: 10px;
+    width: 99%;
 }
 #page-question-type-jme .mform .textareamonospace {
     white-space: pre;
     font-family: Andale Mono, Monaco, Courier New, DejaVu Sans Mono, monospace;
 }
 
+.jme_applet {
+    text-align:center;
+}
+
 .que.jme span.answerlabel {
     vertical-align: top;
 }
-
-/* Editing form. */
-body#page-question-type-jme div[id^=fgroup_id_][id*=answeroptions_] {
+/* Editing form. Style repeated elements*/
+/* Top */
+body#page-question-type-jme div[id^=fitem_id_][id*=answer_],
+body#page-question-type-jme #fitem_id_addanswers + .fitem {
     background: #EEE;
     margin-top: 0;
     margin-bottom: 0;
@@ -34,18 +31,15 @@ body#page-question-type-jme div[id^=fgroup_id_][id*=answeroptions_] {
     border-bottom: 0;
 }
 
-body#page-question-type-jme div[id^=fgroup_id_][id*=answeroptions_] .fgrouplabel label{
+body#page-question-type-jme div[id^=fitem_id_][id*=_answer_] .fitemtitle,
+body#page-question-type-jme #fitem_id_addanswers + .fitem .fitemtitle {
     font-weight: bold;
 }
-
-body#page-question-type-jme div[id^=fgroup_id_][id*=answeroptions_] label[for^='id_answer_']{
-    position: absolute;
-    left: -10000px;
-    font-weight: normal;
-    font-size: 1em;
-}
-
-body#page-question-type-jme div[id^=fitem_id_][id*=fraction_] {
+/* Middle */
+body#page-question-type-jme div[id^=fitem_id_][id*=fraction_],
+body#page-question-type-jme #fitem_id_addanswers + .fitem + .fitem,
+body#page-question-type-jme div[id^=fitem_id_][id*=feedback_],
+body#page-question-type-jme div[id^=fitem_id_][id*=otherfeedback] {
     background: #EEE;
     margin-bottom: 0;
     margin-top: 0;
@@ -55,8 +49,8 @@ body#page-question-type-jme div[id^=fitem_id_][id*=fraction_] {
     border-top: 0;
     border-bottom: 0;
 }
-
-body#page-question-type-jme div[id^=fitem_id_][id*=feedback_] {
+/* Bottom */
+body#page-question-type-jme div[id^=fitem_id_][id*=atomcount_] {
     background: #EEE;
     margin-bottom: 2em;
     margin-top: 0;
@@ -64,4 +58,10 @@ body#page-question-type-jme div[id^=fitem_id_][id*=feedback_] {
     padding-top: 5px;
     border: 1px solid #BBB;
     border-top: 0;
+}
+body#page-question-type-jme #fitem_id_addanswers {
+    margin-bottom: 2em;
+}
+body#page-question-type-jme #fitem_id_answer_0 {
+    margin-top: 1em;
 }

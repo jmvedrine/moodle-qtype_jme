@@ -32,38 +32,41 @@ class qtype_jme_edit_form extends qtype_shortanswer_edit_form {
         global $PAGE, $CFG;
 
         $PAGE->requires->js('/question/type/jme/jme_script.js');
-        $PAGE->requires->css('/question/type/jme/jme_styles.css');
+        $PAGE->requires->css('/question/type/jme/styles.css');
+
+        $mform->addElement('html', html_writer::tag('div', get_string('enablejavaandjavascript', 'qtype_jme'),
+                array('class' => 'jme_applet', 'code' => 'JME.class', 'id' => 'jme1', 'name' => 'JME1',
+                'archive' => 'JME.jar', 'width' => '360', 'height' => '315')));
         $mform->addElement('hidden', 'usecase', 1);
         $mform->setType('usecase', PARAM_INT);
+        $optionscript = 'onClick = "setJSMEoptions()"';
+        $label = get_string('jmeoptions', 'qtype_jme');
+        $editoroptions[] = $mform->createElement('text', 'jmeoptions', '', array('size' => 50));
+        $editoroptions[] = $mform->createElement('button', 'setoptions', get_string('setoptions', 'qtype_jme'), $optionscript);
+        $mform->addElement('group', 'editoroptions',
+                 $label, $editoroptions, null, false);
+        $mform->setDefault('jmeoptions', $CFG->qtype_jme_options);
+        $mform->setType('jmeoptions', PARAM_RAW);
+        $mform->addHelpButton('editoroptions', 'jmeoptions', 'qtype_jme');
+        $mform->addElement('text', 'width', get_string('width', 'qtype_jme'), array('size' => 6));
+        $mform->setDefault('width', QTYPE_JME_APPLET_WIDTH);
+        $mform->setType('width', PARAM_INT);
+        $mform->addElement('text', 'height', get_string('height', 'qtype_jme'), array('size' => 6));
+                $mform->setDefault('height', QTYPE_JME_APPLET_HEIGHT);
+        $mform->setType('height', PARAM_INT);
         $mform->addElement('static', 'answersinstruct',
                 get_string('correctanswers', 'qtype_jme'),
                 get_string('filloutoneanswer', 'qtype_jme'));
         $mform->closeHeaderBefore('answersinstruct');
 
-        $appleturl = new moodle_url('/question/type/jme/jme/JME.jar');
-        // Get the html in the jmelib.php to build the applet.
-        $jmebuildstring = "\n<applet code=\"JME.class\" name=\"JME\" id=\"JME\" archive =\"$appleturl\" width=\"460\" height=\"335\">" .
-                "\n<param name=\"options\" value=\"" . $CFG->qtype_jme_options . "\" />" .
-                "\n" . get_string('javaneeded', 'qtype_jme', '<a href="http://www.java.com">Java.com</a>') .
-                "\n</applet>";
-
-        // Output the jme applet.
-        $mform->addElement('html', html_writer::start_tag('div', array('style'=>'width:520px;')));
-        $mform->addElement('html', html_writer::start_tag('div', array('style'=>'float: right;font-style: italic ;')));
-        $mform->addElement('html', html_writer::start_tag('small'));
-        $jmehomeurl = 'http://www.molinspiration.com/jme/index.html';
-        $mform->addElement('html', html_writer::link($jmehomeurl, get_string('jmeeditor', 'qtype_jme')));
-        $mform->addElement('html', html_writer::empty_tag('br'));
-        $mform->addElement('html', html_writer::tag('span', get_string('author', 'qtype_jme'), array('class'=>'jmeauthor')));
-        $mform->addElement('html', html_writer::end_tag('small'));
-        $mform->addElement('html', html_writer::end_tag('div'));
-        $mform->addElement('html', $jmebuildstring);
-        $mform->addElement('html', html_writer::end_tag('div'));
-
         $this->add_per_answer_fields($mform, get_string('answerno', 'qtype_jme', '{no}'),
                 question_bank::fraction_options());
 
         $this->add_interactive_settings();
+
+        // Include JSME loader script as an html tag.
+        $jsmescript = $CFG->wwwroot.'/question/type/jme/jsme/jsme.nocache.js';
+        $mform->addElement('html', html_writer::tag('script', '', array('src' => $jsmescript)));
     }
 
     protected function get_per_answer_fields($mform, $label, $gradeoptions,

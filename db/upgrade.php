@@ -48,9 +48,63 @@ function xmldb_qtype_jme_upgrade($oldversion) {
             $dbman->drop_table($table);
         }
 
-        // Shortanswer savepoint reached.
+        // Jme savepoint reached.
         upgrade_plugin_savepoint(true, 2013011800, 'qtype', 'jme');
     }
 
+    // Moodle v2.5.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    if ($oldversion < 2013070100) {
+         // Define table qtype_jme_options to be created.
+        $table = new xmldb_table('qtype_jme_options');
+
+        // Adding fields to table qtype_jme_options.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('questionid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('jmeoptions', XMLDB_TYPE_TEXT, 'small', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('width', XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, '420');
+        $table->add_field('height', XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, '315');
+
+        // Adding keys to table qtype_jme_options.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+        $table->add_key('questionid', XMLDB_KEY_FOREIGN_UNIQUE, array('questionid'), 'question', array('id'));
+
+        // Conditionally launch create table for qtype_jme_options.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Jme savepoint reached.
+        upgrade_plugin_savepoint(true, 2013070100, 'qtype', 'jme');
+    }
+
+    if ($oldversion < 2013070102) {
+        // Insert a row into the qtype_jme_options table for each existing jme question.
+        $DB->execute("
+                INSERT INTO {qtype_jme_options} (questionid, jmeoptions, width, height)
+                SELECT q.id, '" . $CFG->qtype_jme_options . "', 420, 315
+                FROM {question} q
+                WHERE q.qtype = 'jme'
+                AND NOT EXISTS (
+                    SELECT 'x'
+                    FROM {qtype_jme_options} qeo
+                    WHERE qeo.questionid = q.id)");
+
+        // Jme savepoint reached.
+        upgrade_plugin_savepoint(true, 2013070102, 'qtype', 'jme');
+    }
+
+    if ($oldversion < 2014080800) {
+        // Changing the default of field width on table qtype_jme_options to 360.
+        $table = new xmldb_table('qtype_jme_options');
+        $field = new xmldb_field('width', XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, '360');
+
+        // Launch change of default for field width.
+        $dbman->change_field_default($table, $field);
+
+        // Main savepoint reached.
+        upgrade_plugin_savepoint(true, 2014080800, 'qtype', 'jme');
+    }
     return true;
 }

@@ -31,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
  */
 class qtype_jme_renderer extends qtype_renderer {
     public function formulation_and_controls(question_attempt $qa,
-            question_display_options $options) {
+                                             question_display_options $options) {
         global $CFG, $PAGE;
 
         $question = $qa->get_question();
@@ -84,23 +84,34 @@ class qtype_jme_renderer extends qtype_renderer {
                                     $this->hidden_fields($qa),
                                     array('class' => 'inputcontrol'));
 
-        $this->require_js($toreplaceid, $qa, $options->readonly, $options->correctness, $CFG->qtype_jme_options);
+        $this->require_js($toreplaceid, $qa, $options->readonly, $options->correctness);
+
+        // Include JSME loader script as an html tag.
+        $jsmescript = $CFG->wwwroot.'/question/type/jme/jsme/jsme.nocache.js';
+        $result .= html_writer::tag('script', '', array('src' => $jsmescript));
 
         return $result;
     }
 
-    protected function require_js($toreplaceid, question_attempt $qa, $readonly, $correctness, $appletoptions) {
+    protected function require_js($toreplaceid, question_attempt $qa, $readonly, $correctness) {
         global $PAGE;
         $jsmodule = array(
             'name'     => 'qtype_jme',
             'fullpath' => '/question/type/jme/module.js',
             'requires' => array(),
             'strings' => array(
-                array('enablejava', 'qtype_jme')
+                array('enablejavascript', 'qtype_jme')
             )
         );
         $topnode = 'div.que.jme#q'.$qa->get_slot();
         $appleturl = new moodle_url('/question/type/jme/jme/JME.jar');
+        $question = $qa->get_question();
+
+        // They will be converted to strings later.
+        $width = $question->width;
+        $height = $question->height;
+
+        $appletoptions = $question->jmeoptions;
         if ($correctness) {
             $feedbackimage = $this->feedback_image($this->fraction_for_last_response($qa));
         } else {
@@ -108,6 +119,7 @@ class qtype_jme_renderer extends qtype_renderer {
         }
         $name = 'JME'.$qa->get_slot();
         $appletid = 'jme'.$qa->get_slot();
+
         $PAGE->requires->js_init_call('M.qtype_jme.insert_jme_applet',
                                       array($toreplaceid,
                                             $name,
@@ -116,9 +128,34 @@ class qtype_jme_renderer extends qtype_renderer {
                                             $appleturl->out(),
                                             $feedbackimage,
                                             $readonly,
+                                            "$width",
+                                            "$height",
                                             $appletoptions),
                                       false,
                                       $jsmodule);
+
+    }
+
+    protected function hidden_fields(question_attempt $qa) {
+        $question = $qa->get_question();
+
+        $hiddenfieldshtml = '';
+        $inputids = new stdClass();
+        $responsefields = array_keys($question->get_expected_data());
+        foreach ($responsefields as $responsefield) {
+            $hiddenfieldshtml .= $this->hidden_field_for_qt_var($qa, $responsefield);
+        }
+        return $hiddenfieldshtml;
+    }
+    protected function hidden_field_for_qt_var(question_attempt $qa, $varname) {
+        $value = $qa->get_last_qt_var($varname, '');
+        $fieldname = $qa->get_qt_field_name($varname);
+        $attributes = array('type' => 'hidden',
+                            'id' => str_replace(':', '_', $fieldname),
+                            'class' => $varname,
+                            'name' => $fieldname,
+                            'value' => $value);
+        return html_writer::empty_tag('input', $attributes);
     }
 
     protected function fraction_for_last_response(question_attempt $qa) {
@@ -171,26 +208,4 @@ class qtype_jme_renderer extends qtype_renderer {
         return get_string('correctansweris', 'qtype_jme', s($answer->answer));
     }
 
-    protected function hidden_fields(question_attempt $qa) {
-        $question = $qa->get_question();
-
-        $hiddenfieldshtml = '';
-        $inputids = new stdClass();
-        $responsefields = array_keys($question->get_expected_data());
-        foreach ($responsefields as $responsefield) {
-            $hiddenfieldshtml .= $this->hidden_field_for_qt_var($qa, $responsefield);
-        }
-        return $hiddenfieldshtml;
-    }
-
-    protected function hidden_field_for_qt_var(question_attempt $qa, $varname) {
-        $value = $qa->get_last_qt_var($varname, '');
-        $fieldname = $qa->get_qt_field_name($varname);
-        $attributes = array('type' => 'hidden',
-                            'id' => str_replace(':', '_', $fieldname),
-                            'class' => $varname,
-                            'name' => $fieldname,
-                            'value' => $value);
-        return html_writer::empty_tag('input', $attributes);
-    }
 }
