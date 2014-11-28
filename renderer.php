@@ -44,12 +44,12 @@ class qtype_jme_renderer extends qtype_renderer {
 
         $toreplaceid = 'applet'.$qa->get_slot();
         $toreplace = html_writer::tag('span',
-                                      get_string('enablejavaandjavascript', 'qtype_jme'),
+                                      get_string('enablejavascript', 'qtype_jme'),
                                       array('id' => $toreplaceid));
 
         if ($placeholder) {
             $toreplace = html_writer::tag('span',
-                                      get_string('enablejavaandjavascript', 'qtype_jme'),
+                                      get_string('enablejavascript', 'qtype_jme'),
                                       array('class' => 'ablock'));
             $questiontext = substr_replace($questiontext,
                                             $toreplace,
@@ -120,7 +120,7 @@ class qtype_jme_renderer extends qtype_renderer {
         $name = 'JME'.$qa->get_slot();
         $appletid = 'jme'.$qa->get_slot();
 
-        $PAGE->requires->js_init_call('M.qtype_jme.insert_jme_applet',
+        $PAGE->requires->js_init_call('M.qtype_jme.insert_applet',
                                       array($toreplaceid,
                                             $name,
                                             $appletid,

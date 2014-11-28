@@ -1,6 +1,6 @@
 
 
-#Moodle question type addon: "JME" (Java Molecular Editor)
+#Moodle question type addon: "JME" (Javascript Molecular Editor)
 
 Original Moodle question type written by Dan Stowell
 Upgraded and maintained by Jean-Michel Vedrine
@@ -71,7 +71,7 @@ can ask questions such as "Please draw the structure of
 be converted to a simple text format called SMILES (see
 http://www.daylight.com/smiles/ for more information).
 
-So, the student must design the molecule, using the JME Java Applet.
+So, the student must design the molecule, using the JSME Javascript Applet.
 The content of the student response is automatically saved when the
 student change page in the quiz either by pressing on the "Next"
 button, or using the quiz navigation panel. When quiz attempt is

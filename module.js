@@ -4,10 +4,18 @@
 
 M.qtype_jme = {
     useJSME : true,
-    insert_jme_applet : function(Y, toreplaceid, appletid, name, topnode,
+    reload_limit : 10,
+    editor_displayed : false,
+    topnode : null,
+    applet_name : null,
+    Y : null,
+    insert_applet : function(Y, toreplaceid, appletid, name, topnode,
                                                                     appleturl, feedback, readonly, width, height, appletoptions){
         var javaparams = ['jme', Y.one(topnode + ' input.jme').get('value')];
         var jmeoptions = new Array();
+        this.applet_name = name;
+        this.topnode = topnode;
+        this.Y = Y;
 
         if (appletoptions) {
             jmeoptions[jmeoptions.length] = appletoptions;
@@ -20,28 +28,34 @@ M.qtype_jme = {
             javaparams[javaparams.length] = jmeoptions.join(',');
         }
 
-        if (!this.show_java(toreplaceid, appletid, name, appleturl,
-                                                            width, height, 'JME.class', javaparams, jmeoptions)) {
+        this.show_java(toreplaceid, appletid, name, appleturl,
+                       width, height, 'JME.class', javaparams, jmeoptions);
+    },
+    update_inputs : function() {
+        var Y = this.Y,
+        name = this.applet_name,
+        topnode = this.topnode;
+        if (!this.editor_displayed) {
             this.show_error(Y, topnode);
         } else {
             var inputdiv = Y.one(topnode);
             inputdiv.ancestor('form').on('submit', function (){
-                Y.one(topnode + ' input.answer').set('value', this.find_java_applet(name).smiles());
-                Y.one(topnode + ' input.jme').set('value', this.find_java_applet(name).jmeFile());
-                Y.one(topnode + ' input.mol').set('value', this.find_java_applet(name).molFile())
+                Y.one(topnode + ' input.answer').set('value', this.find_applet(name).smiles());
+                Y.one(topnode + ' input.jme').set('value', this.find_applet(name).jmeFile());
+                Y.one(topnode + ' input.mol').set('value', this.find_applet(name).molFile())
             }, this);
         }
     },
     show_error : function (Y, topnode) {
-        var errormessage = '<span class ="javawarning">' +
-            M.util.get_string('enablejava', 'qtype_jme') +
+        var errormessage = '<span class ="javascriptwarning">' +
+            M.util.get_string('enablejavascript', 'qtype_jme') +
             '</span>';
         Y.one(topnode + ' .ablock').insert(errormessage, 1);
     },
     /**
      * Gets around problem in ie6 using name
      */
-    find_java_applet : function (appletname) {
+    find_applet : function (appletname) {
         var applets = this.useJSME ? document.jsapplets : document.applets;
         for (appletno in applets) {
             if (applets[appletno].name == appletname) {
@@ -67,6 +81,15 @@ M.qtype_jme = {
         if (!this.javainstalled && !this.useJSME) {
             return false;
         }
+
+        // Ensure the JSME code is loaded properly. IE 8 struggles.
+        if (typeof JSApplet !== 'object' && this.reload_limit) {
+            setTimeout(function(){M.qtype_jme.show_java(id, appletid, name,
+                            java, width, height, appletclass, javavars, jmeoptions)}, 100);
+            this.reload_limit--;
+            return false;
+        }
+
         var elementname = this.useJSME ? "div" : "applet";
         var newApplet = document.createElement(elementname);
         newApplet.setAttribute('code', appletclass);
@@ -131,6 +154,10 @@ M.qtype_jme = {
             this.doneie6focus = 1;
         }
 
-        return true;
+        this.editor_displayed = true;
+
+        this.update_inputs();
+
+        return this.editor_displayed;
     }
 }
