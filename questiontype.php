@@ -56,12 +56,21 @@ class qtype_jme extends qtype_shortanswer {
      * @return string the data to append to the output buffer or false if error
      */
     public function export_to_xml( $question, qformat_xml $format, $extra=null ) {
+        $extraquestionfields = $this->extra_question_fields();
+        array_shift($extraquestionfields);
+        $expout='';
+        foreach ($extraquestionfields as $field) {
+            $exportedvalue = $format->xml_escape($question->options->$field);
+            $expout .= "    <{$field}>{$exportedvalue}</{$field}>\n";
+        }
         // Write out all the answers.
-        $expout = $format->write_answers($question->options->answers);
+        $expout .= $format->write_answers($question->options->answers);
         return $expout;
     }
 
     public function import_from_xml($data, $question, qformat_xml $format, $extra=null) {
+        global $CFG;
+
         if (!array_key_exists('@', $data)) {
             return false;
         }
@@ -75,6 +84,9 @@ class qtype_jme extends qtype_shortanswer {
 
             // Header parts particular to jme.
             $question->qtype = 'jme';
+            $question->jmeoptions = $format->getpath($data, array('#', 'jmeoptions', 0, '#'), $CFG->qtype_jme_options);
+            $question->width = $format->getpath($data, array('#', 'width', 0, '#'), QTYPE_JME_APPLET_WIDTH);
+            $question->height = $format->getpath($data, array('#', 'height', 0, '#'), QTYPE_JME_APPLET_HEIGHT);
 
             // Run through the answers.
             $answers = $data['#']['answer'];
