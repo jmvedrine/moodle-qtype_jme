@@ -83,4 +83,32 @@ class restore_qtype_jme_plugin extends restore_qtype_plugin {
             $this->set_mapping('qtype_jme_options', $oldid, $newitemid);
         }
     }
+
+    /**
+     * When restoring old data, that does not have the jme options information
+     * in the XML, supply defaults.
+     */
+    protected function after_execute_question() {
+        global $DB, $CFG;
+
+        $jmewithoutoptions = $DB->get_records_sql("
+                    SELECT *
+                      FROM {question} q
+                     WHERE q.qtype = ?
+                       AND NOT EXISTS (
+                        SELECT 1
+                          FROM {qtype_jme_options}
+                         WHERE questionid = q.id
+                     )
+                ", array('jme'));
+
+        foreach ($jmewithoutoptions as $q) {
+            $defaultoptions = new stdClass();
+            $defaultoptions->questionid = $q->id;
+            $defaultoptions->jmeoptions = $CFG->qtype_jme_options;
+            $defaultoptions->width = 360;
+            $defaultoptions->height = 315;
+            $DB->insert_record('qtype_jme_options', $defaultoptions);
+        }
+    }
 }

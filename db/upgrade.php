@@ -106,5 +106,23 @@ function xmldb_qtype_jme_upgrade($oldversion) {
         // Main savepoint reached.
         upgrade_plugin_savepoint(true, 2014080800, 'qtype', 'jme');
     }
+
+    if ($oldversion < 2015050600) {
+        // Insert a row into the qtype_jme_options table for each existing jme question.
+        // This is done to correct broken jme questions after a restore from old version
+        $DB->execute("
+                INSERT INTO {qtype_jme_options} (questionid, jmeoptions, width, height)
+                SELECT q.id, '" . $CFG->qtype_jme_options . "', 360, 315
+                FROM {question} q
+                WHERE q.qtype = 'jme'
+                AND NOT EXISTS (
+                    SELECT 'x'
+                    FROM {qtype_jme_options} qeo
+                    WHERE qeo.questionid = q.id)");
+
+
+        // Main savepoint reached.
+        upgrade_plugin_savepoint(true, 2015050600, 'qtype', 'jme');
+    }
     return true;
 }
