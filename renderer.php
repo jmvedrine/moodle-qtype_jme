@@ -103,7 +103,10 @@ class qtype_jme_renderer extends qtype_renderer {
                 array('enablejavascript', 'qtype_jme')
             )
         );
-        $topnode = 'div.que.jme#q'.$qa->get_slot();
+        // Segun Babalola (segun@babalola.com) 2019-08-07.
+        // Fix to get the editor to render. Using get_slot() does not find the DOM element required.
+        // $topnode = 'div.que.jme#q'.$qa->get_slot();
+        $topnode = 'div.que.jme#'.$qa->get_outer_question_div_unique_id();
         $appleturl = new moodle_url('/question/type/jme/jme/JME.jar');
         $question = $qa->get_question();
 
