@@ -45,7 +45,13 @@ class qtype_jme_edit_form extends qtype_shortanswer_edit_form {
         $editoroptions[] = $mform->createElement('button', 'setoptions', get_string('setoptions', 'qtype_jme'), $optionscript);
         $mform->addElement('group', 'editoroptions',
                  $label, $editoroptions, null, false);
-        $mform->setDefault('jmeoptions', $CFG->qtype_jme_options);
+
+        // Segun Babalola, 2019-08-07.
+        // Adding check for existence of options before trying to use it because it is causing PHP error in UI.
+        if (isset($CFG->qtype_jme_options)) {
+            $mform->setDefault('jmeoptions', $CFG->qtype_jme_options);
+        }
+
         $mform->setType('jmeoptions', PARAM_RAW);
         $mform->addHelpButton('editoroptions', 'jmeoptions', 'qtype_jme');
         $mform->addElement('text', 'width', get_string('width', 'qtype_jme'), array('size' => 6));

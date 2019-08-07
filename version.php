@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2015050600;
+$plugin->version   = 2019080700;
 $plugin->requires  = 2013110500;
 $plugin->cron      = 0;
 $plugin->component = 'qtype_jme';
