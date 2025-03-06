@@ -79,7 +79,7 @@ class qtype_jme_edit_form extends qtype_shortanswer_edit_form {
         $scriptattrs = 'onClick = "getSmilesEdit(this.name)"';
         $answeroptions[] = $mform->createElement('button', 'insert', get_string('insertfromeditor', 'qtype_jme'), $scriptattrs);
         $answeroptions[] = $mform->createElement('select', 'fraction',
-                get_string('grade'), $gradeoptions);
+                get_string('gradenoun'), $gradeoptions);
         $repeated[] = $mform->createElement('group', 'answeroptions',
                  $label, $answeroptions, null, false);
         $repeated[] = $mform->createElement('editor', 'feedback',
