@@ -1,4 +1,4 @@
-
+WARNING : I am now retired and I stopped all Moodle related activities. This repository is here just for history and this work is not maintained any more. Feel free to fork it and modify it to suit your needs or improve compatibility with recent Moodle versions. Additionaly you can consider contacting the Moodle team and become the new maintainer of this plugin. Thanks
 
 #Moodle question type addon: "JME" (Javascript Molecular Editor)
 
@@ -7,8 +7,8 @@ Upgraded and maintained by Jean-Michel Vedrine
 
 ###IMPORTANT:
 Previous versions of the jme Moodle question type were using a java applet,
-the JME Molecule Editor©.
-JME Molecule Editor© is a freely-available molecule editor tool, but it is not
+the JME Molecule EditorÂ©.
+JME Molecule EditorÂ© is a freely-available molecule editor tool, but it is not
 open-source.
 Another problem with JME is that it is now very difficult to work with java applets
 due to security alerts and rules in web browsers.
