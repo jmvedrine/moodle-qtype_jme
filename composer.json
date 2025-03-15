@@ -1,0 +1,21 @@
+{
+    "name": "jmvedrine/moodle-qtype_jme",
+    "description": "Javascript Molecular Editor question type for Moodle.",
+    "type": "moodle-qtype",
+ 	"authors": [
+    	{
+        	"name": "Dan Stowell"
+        },
+        {
+        	"name": "Jean-Michel Vedrine",
+            "email": "vedrine@vedrine.net",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "composer/installers": "~1.0"
+    },
+    "extra": {
+        "installer-name": "jme"
+    }
+} 
